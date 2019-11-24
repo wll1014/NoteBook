@@ -1,4 +1,4 @@
-# CNN
+# CNN-卷积神经网络
 
 ## 前情回顾
 
@@ -38,15 +38,18 @@
 
 假设一个图片的是黑白色的，其数据如下：
 
-![图片数据](E:\NoteBook\llwu\cnn\图片数据.png)
+![图片数据](.\cnn\图片数据.png)
+
+
+
 
 假设卷积矩阵（filter）如下（一般选择奇数的矩阵）：
 
-![卷积层Filter](E:\NoteBook\llwu\cnn\卷积层Filter.png)
+![卷积层Filter](.\cnn\卷积层Filter.png)
 
 卷积神经网络是如何通过filter卷积计算的？计算过程如下：
 
-![卷积流程](E:\NoteBook\llwu\cnn\卷积流程.png)
+![卷积流程](.\cnn\卷积流程.png)
 
 假设图片矩阵的size:
 $$
@@ -124,21 +127,21 @@ $$
 
 设原始图片如下，检测该图片是否存在中间的竖线
 
-![feature_detection_source](E:\NoteBook\llwu\cnn\feature_detection_source.png)
+![feature_detection_source](.\cnn\feature_detection_source.png)
 
 卷积filter如下
 
-![feature_detection_filter](E:\NoteBook\llwu\cnn\feature_detection_filter.png)
+![feature_detection_filter](.\cnn\feature_detection_filter.png)
 
 检测结果如下
 
-![feature_detection_result](E:\NoteBook\llwu\cnn\feature_detection_result.png)
+![feature_detection_result](.\cnn\feature_detection_result.png)
 
 ### 卷积操作中偶尔会用到的操作
 
 ####  more about cnns padding1
 
-![padding1](E:\NoteBook\llwu\cnn\padding1.png)
+![padding1](.\cnn\padding1.png)
 
 如果想卷积后尺寸和卷积前尺寸一致，那么
 $$
@@ -192,7 +195,7 @@ $$
 
 正常卷积的时候，strides是为1的；即step=1即上下左右都是1
 
-![cnn_strides3](E:\NoteBook\llwu\cnn\cnn_strides3.png)
+![cnn_strides3](.\cnn\cnn_strides3.png)
 
 所以如果数据量比较大的时候，加速计算尺寸收缩，可以，设置stride
 
@@ -216,7 +219,7 @@ $$
 
 原始图片用来计算当前点的像素数目
 
-![感受野](E:\NoteBook\llwu\cnn\感受野.png)
+![感受野](.\cnn\感受野.png)
 
 [感受野详细]( https://blog.csdn.net/program_developer/article/details/80958716 )
 
@@ -228,37 +231,72 @@ $$
 
 - maxpool
 
-![max_pool](E:\NoteBook\llwu\cnn\max_pool.png)
+![max_pool](.\cnn\max_pool.png)
 
 - average pool
 
-![average_pool](E:\NoteBook\llwu\cnn\average_pool.png)
+![average_pool](.\cnn\average_pool.png)
 
 好处： 无需参数却能够降低维度
 
 #### more about cnns feature maps
 
-![feature_map](E:\NoteBook\llwu\cnn\feature_map.png)
+![feature_map](.\cnn\feature_map.png)
 
-### 训练方法
+### 数字识别示例方法（类似letNet-5）
+
+![数字识别算法](./cnn/digit_detection.png)
+
+
+
+
+
+
 
 ## 著名的神经网络模型
 
-### LetNet
-
 ### AlexNet
+
+![AlexNet流程](.\cnn\AlexNet.png)
 
 ### GoogleNet
 
-### VGG，ResNet
+![GoogleNet创新](./cnn/googleNet.png)
 
-### DeseNet
+### VGG
 
-## 编码
+![VGG卷积神经网络](./cnn/VGG.png)
 
-### keras
+### ResNet
 
-### TF2.0
+ResNet超级深 
+
+之前深的神经网络存在的问题：
+
+* 参数多，训练不动
+* 容易过拟合
+
+ResNet--允许跳级卷积
+
+
+
+​		
+
+![image-20191123234915211](./cnn/RestNet.png)
+
+## TEXTCNN -NLP 应用
+
+NLP一般使用一维卷积
+
+首先wordEmbeding
+
+只从上到下进行卷积
+
+![image-20191123235410262](./cnn/TEXTCNN.png)
+
+
+
+
 
 
 
