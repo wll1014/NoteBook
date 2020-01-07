@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./static/echarts.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="main" style="width: 800px;height:1000px;">
+    
+    
+    </div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var zhibiao = ['指标1-负面', '指标2-未提及', '指标3-提及', '指标4-正面'];
+        var category = ['种类1', '种类2', '种类3','种类4', '种类5', '种类6','种类7', '种类8', '种类9','种类10',
+        '种类11', '种类12', '种类13','种类14', '种类15', '种类16','种类17', '种类18', '种类19','种类20'];
+
+        var data = [
+            [0,0,0],[0,1,0],[0,2,0],[0,3,4],//单元组最后一个值是每隔指标的占比
+            [1,0,4],[1,1,0],[1,2,0],[1,3,0],
+            [2,0,1],[2,1,2],[2,2,4],[2,3,4],
+            [3,0,1],[3,1,2],[3,2,4],[3,3,4],
+            [4,0,1],[4,1,2],[4,2,4],[4,3,4],
+            [5,0,1],[5,1,2],[5,2,4],[5,3,4],
+            [6,0,1],[6,1,2],[6,2,4],[6,3,4],
+            [7,0,1],[7,1,2],[7,2,4],[7,3,4],
+            [8,0,1],[8,1,2],[8,2,4],[8,3,4],
+            [9,0,1],[9,1,2],[9,2,4],[9,3,4],
+            [10,0,1],[10,1,2],[10,2,4],[10,3,4],
+            [11,0,1],[11,1,2],[11,2,4],[11,3,4],
+            [12,0,1],[12,1,2],[12,2,4],[12,3,4],
+            [13,0,1],[13,1,2],[13,2,4],[13,3,4],
+            [14,0,1],[14,1,2],[14,2,4],[14,3,4],
+            [15,0,1],[15,1,2],[15,2,4],[15,3,4],
+            [16,0,1],[16,1,2],[16,2,4],[16,3,4],
+            [17,0,1],[17,1,2],[17,2,4],[17,3,4],
+            [18,0,1],[18,1,2],[18,2,4],[18,3,4],
+            [19,0,1],[19,1,2],[19,2,4],[19,3,4]
+        ];
+
+        option = {
+            tooltip: {
+                position: 'top'
+            },
+            title: [],
+            singleAxis: [],
+            series: []
+        };
+
+        echarts.util.each(category, function (c, idx) {
+            option.title.push({
+                textBaseline: 'middle',
+                top: (idx + 0.5) * 100 / 20 + '%',
+                text: c
+            });
+            option.singleAxis.push({
+                left: 150,
+                type: 'category',
+                boundaryGap: false,
+                data: zhibiao,
+                top: (idx * 100 / 20 )+2 + '%',
+                height: (100 / 20 - 7) + '%',
+                axisLabel: {
+                    interval: 0,
+                    show:true,
+                    
+                    showMinLabel:true,
+                }
+            });
+            option.series.push({
+                singleAxisIndex: idx,
+                coordinateSystem: 'singleAxis',
+                type: 'scatter',
+                data: [],
+                symbolSize: function (dataItem) {
+                    return dataItem[1] * 4;
+                }
+            });
+        });
+
+        echarts.util.each(data, function (dataItem) {
+            option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
+        });
+    
+    
+    
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
