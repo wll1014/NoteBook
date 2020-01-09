@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./static/echarts.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="main" style="width: 400px;height:600px;">
+    
+    
+    </div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var data = {
+            "name": "flare",
+            "children": [
+                {
+                    "name": "data", 
+                    "children":[{
+                        "name":"n1",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]
+                    },{
+                        "name":"n2",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]
+                    },{
+                        "name":"n3"  ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]
+                    },{
+                        "name":"n4",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]
+                    }]
+                    
+                },
+                {
+                    "name": "display",
+                    "children":[{
+                        "name":"n1",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]   
+                    },{
+                        "name":"n2",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]   
+                    },{
+                        "name":"n3",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]  
+                    },{
+                        "name":"n4" ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }] 
+                    }]
+                    
+                },
+                {
+                    "name": "flex",
+                    "children":[{
+                        "name":"n1" ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]  
+                    },{
+                        "name":"n2" ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]  
+                    },{
+                        "name":"n3" ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }] 
+                    },{
+                        "name":"n4"  ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]
+                    }]
+                
+                },
+                {
+                    "name": "query",
+                    "children":[{
+                        "name":"n1"  ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }] 
+                    },{
+                        "name":"n2",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]   
+                    },{
+                        "name":"n3",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]  
+                    },{
+                        "name":"n4" ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]   
+                    }]
+                    
+                },
+                {
+                    "name": "scale",
+                    "children":[{
+                        "name":"n1",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]     
+                    },{
+                        "name":"n2"  ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]   
+                    },{
+                        "name":"n3",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]    
+                    },{
+                        "name":"n4",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]    
+                    }]
+                    
+                },
+                {
+                    "name": "lily",
+                    "children":[{
+                        "name":"n1",
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]     
+                    },{
+                        "name":"n2" ,
+                        "children":[{
+                                "name":"tiji"//指标结果
+                            }]    
+                    }]
+                    
+                }
+            ]
+        };
+
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            series:[
+                {
+                    type: 'tree',
+                    id: 0,
+                    name: 'tree1',
+                    data: [data],
+
+                    top: '10%',
+                    left: '8%',
+                    bottom: '22%',
+                    right: '20%',
+
+                    symbolSize: 7,
+
+                    edgeShape: 'polyline',
+                    edgeForkPosition: '63%',
+                    initialTreeDepth: 3,
+
+                    lineStyle: {
+                        width: 2
+                    },
+
+                    label: {
+                        backgroundColor: '#fff',
+                        position: 'left',
+                        verticalAlign: 'middle',
+                        align: 'right'
+                    },
+
+                    leaves: {
+                        label: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    },
+
+                    expandAndCollapse: true,
+                    animationDuration: 550,
+                    animationDurationUpdate: 750
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
