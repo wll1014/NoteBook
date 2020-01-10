@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="main" style="width: 1000px;height:1000px;margin-top: 80px">
+    <div id="main" style="width: 1000px;height:200px;margin-top: 80px">
     
     
     </div>
@@ -16,9 +16,10 @@
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
 
-        var zhibiao = ['种类1', '种类2', '种类3','种类4', '种类5', '种类6','种类7', '种类8', '种类9','种类10',
-        '种类11', '种类12', '种类13','种类14', '种类15', '种类16','种类17', '种类18', '种类19','种类20'];
-        var category = ['result'];
+        var zhibiao = ['traffic conveenience', 'distance from business distric', 'easy to find','wait time', "waiter's attitude",
+         'parking convenience','serving speed', 'price level', 'cost effective','discount',
+        'decoration', 'noise', 'space','cleaness', 'portion', 'tast','look', 'recommendation', 'overall experience','willing to consume aggain'];
+        var category = ['被分析文本'];
 
         var data = [
             [0,0,1],[0,1,2],[0,2,3],[0,3,4],//单元组最后一个值是每隔指标的占比
@@ -50,7 +51,6 @@
                     }
                     var des = data.name +":"+result
                     return des
-                    console.log(data)
                 }
                 
             },
@@ -62,7 +62,7 @@
         echarts.util.each(category, function (c, idx) {
             option.title.push({
                 textBaseline: 'middle',
-                top: (idx + 0.5) * 100 / 20 + '%',
+                top: (idx + 0.5) * 100 / 10 + '%',
                 text: c
             });
             option.singleAxis.push({
@@ -70,13 +70,14 @@
                 type: 'category',
                 boundaryGap: false,
                 data: zhibiao,
-                top: (idx * 100 / 20 )+2 + '%',
-                height: (100 / 20 - 7) + '%',
+                top: (idx * 100 / 10 )+2 + '%',
+                height: (100 / 10 - 2) + '%',
                 axisLabel: {
                     interval: 0,
                     show:true,
                     
                     showMinLabel:true,
+                    rotate:30
                 }
             });
             option.series.push({
@@ -94,12 +95,6 @@
             
             option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
         });
-    
-    
-    
-
-
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     </script>
