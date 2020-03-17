@@ -20,10 +20,28 @@ $$
 
 ### What is the 'Logistic Loss' ?
 
-逻辑回归的损失函数
+正常的损失函数
 $$
-L=MSE=sigm(y_i-y)
+L=MSE=\frac{1}{m}\sum_{i=1}^m\left({y}-{\hat{y_i}}\right)^2
 $$
+
+$$
+L=MSE=\frac{1}{m}\sum_{i=1}^m\left|{y}-{\hat{y_i}}\right|
+$$
+
+逻辑损失
+$$
+Loss = \hat{y}^y*\left(1-\hat{y}\right)^\left(1-y\right)
+$$
+
+$$
+L = -y*log(\hat{y})+\left(1-y\right)*log\left(1-\hat{y}\right)
+$$
+
+$$
+L = -\frac{1}{m}\sum_{i}^T y_i*log(\hat{y_i})+\left(1-y_i\right)*log\left(1-\hat{y_i}\right)
+$$
+
 
 
 ###  Assume that you are building a binary classifier for detecting if an image containing cats, which activation functions would you recommen using for the output layer ?
@@ -36,12 +54,6 @@ D. tanh
 ### Why we don't use zero initialization for all parameters ?
 
 
-
-why max max
-
-导数定值，迭代速度快
-
-不容易出现瓶颈，不容易出现迭代不动的情况，
 
 ### Can you implement the softmax function using python ?
 
