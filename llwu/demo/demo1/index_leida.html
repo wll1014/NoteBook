@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./static/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -15,14 +16,53 @@
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-
+        var data_leida ={
+            "location":{
+                "traffic conveenience":1,
+                "distance from business distric":-2,
+                "easy to find" :2
+            },
+            "service":{
+                "wait time":-1,
+                "waiter's attitude":2,
+                "parking convenience":0,
+                "serving speed":2,
+            },
+            "price":{
+                "price level" :-1,
+                "cost effective":-2,
+                "discount":2,
+            },
+            "environment":{
+                "decoration":2,
+                "noise":0,
+                "space":-1,
+                "cleaness":2,
+            },
+            "dish":{
+                "portion":-1,
+                "tast":0,
+                "look":2,
+                "recommendation":-1,
+            },
+            "others":{
+                "overall experience":1,
+                "willing to consume aggain":2,
+            }
+        }
+        var data_value = []
+        for (var attr in data_leida){
+            var value = 0
+            for (var attrr in data_leida[attr]){
+                value = value + data_leida[attr][attrr]+3
+            }
+            data_value.push(value*1000)
+        }
         option = {
             title: {
                 text: '基础雷达图'
             },
-            tooltip: {},
-            legend: {
-                data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
+            tooltip: {
             },
             radar: {
                 // shape: 'circle',
@@ -35,12 +75,12 @@
                     }
                 },
                 indicator: [
-                    { name: '位置', max: 6500},
-                    { name: '服务', max: 16000},
-                    { name: '价格', max: 30000},
-                    { name: '环境', max: 38000},
-                    { name: '菜品', max: 52000},
-                    { name: '其他', max: 25000}
+                    { name: '位置', max: 20000},
+                    { name: '服务', max: 20000},
+                    { name: '价格', max: 20000},
+                    { name: '环境', max: 20000},
+                    { name: '菜品', max: 20000},
+                    { name: '其他', max: 20000}
                 ]
             },
             series: [{
@@ -49,7 +89,7 @@
                 // areaStyle: {normal: {}},
                 data: [
                     {
-                        value: [4300, 10000, 28000, 35000, 50000, 19000],
+                        value: data_value,
                         name: '被分析文本'
                     },
                 ]

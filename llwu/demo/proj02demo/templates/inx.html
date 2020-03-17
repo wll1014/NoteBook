@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新闻自动摘要系统</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./static/echarts.min.js"></script>
+    <script src="./static/sd_1.js"></script>
+    <script src="./static/tree.js"></script>
+    <script src="./static/leida.js"></script>
+    <script src="./static/sd_2.js"></script>
+    <style>
+        .container{
+            margin-top: 5%;
+        }
+        .tab-container{
+            min-height: 300px;
+        }
+        /* .home-container{
+            margin-top: 5%;
+        } */
+        .title{
+            background-color: #E6E6FA;
+            height: 40px;
+        }
+        .text{
+            min-height: 240px;
+            margin-top: 30px;
+            background-color: #E6E6FA;
+        }
+        #abstract{
+            min-height: 300px;
+            background-color: #E6E6FA
+        }
+        .btn-abstract{
+            margin-top: 30px;
+            margin-left:46%;
+        }
+        .input__area{
+            font-family:verdana;
+        }
+        .positive{
+            color: #FF164C;
+        }
+        .negative{
+            color: #409898;        
+        }
+        .neutral{
+            color: dimgrey;
+        }
+        .tree_leida_wrapper{
+            width: 1400px;
+            margin: 0px auto;
+        }
+        #main_sd_2{
+            width: 800px;
+            margin: 0px auto;
+        }
+        .extrat_content_title{
+            height: 30px;
+        }
+        .content_detail{
+            height: 30px;
+            margin-top: 30px;
+        }
+        .extrat_content{
+            margin-left: 20px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#home">主页</a></li>
+        <li><a href="#principle">原理</a></li>
+        <li><a href="#code">源码</a></li>
+        <li><a href="#versions">版本</a></li>
+        <li><a href="#contribution">贡献者</a></li>
+    </ul>
+    <h1 align="center" style="font-family:verdana">基于SIF句向量的新闻自动摘要系统</h1>
+    <h4 align="center" style="font-family:verdana">（根据给出文章长度的不同，计算摘要需要1-3秒不等）</h4>
+    <div class="container">
+        <div class="home-container tab-container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="acticle">
+                    <div class="title" , id="textbox_title">
+                        <textarea id="inputTitle" dir="auto" class="input__area" placeholder="请输入文章标题（可选）", style="background:transparent;resize: none; overflow: auto hidden; box-sizing: border-box; height: 40px; width: 555px; padding-bottom: 18px;"></textarea>
+                    </div>
+                    <div class="text" , id="textbox_content">
+                        <textarea id="inputContent" dir="auto" class="input__area" placeholder="请输入文章正文", style="background:transparent; overflow: auto; box-sizing: border-box; height: 300px; width: 555px; padding-bottom: 18px;"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="abstract"><h5>(左边输入文章后点击下方按钮，人工智(zhi)能(zhang)就会帮你生成摘要哦！^_^)</h5></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="aaaaaa">
+                    <button id="submitbt" type="button" class="btn btn-primary btn-abstract">生成摘要</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="analyse-result-container" style="display: none;">
+                    
+                    <div  class="analyse_result" >
+                        <div class="extrat_content_title">情感内容提取</div>
+                        <div class="extrat_content">
+                            <span id="positive_content" class="positive"></span><span class="positive">，</span>
+                            <span id="neutral_content" class="neutral"></span><span class="neutral">，</span>
+                            <span id="negative_content" class="negative"></span><span class="negative">。</span>
+                        </div>
+                        
+                    </div>
+                    <div class="main_picture_wrapper">
+                        <div class="content_detail">内容详情</div>
+                        <div id="main_sd_1" style="width: 1000px;height:150px;margin-top: 30px;"></div>
+                        <div class="tree_leida_wrapper" style="height: 600px;">
+                            <div id="main_tree" style="width: 550px;height:600px;margin-top: 30px;float: left;"></div>
+                            <div id="main_leida" style="width: 600px;height:300px;margin-top: 180px;float: left;"></div>
+                        </div>
+                        <div class="sd_wrapper">
+                            <div id="main_sd_2" style="height:1000px;margin-top: 30px;"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="principle-container tab-container" style="display: none">
+            <div class="row">
+                (待添加)
+            </div>
+        </div>
+        <div class="code-container tab-container" style="display: none">
+            <div class="row">
+                (待添加)
+            </div>
+        </div>
+        <div class="versions-container tab-container" style="display: none">
+            <div class="row">
+                <h2>更新历史</h2>(当前版本: 0.3.0)<br>
+                
+                <h3>版本 0.3.0 - 2019.12.05</h3>
+                - 功能改进：现在会根据输入正文的长度，自适应计算摘要应有的长度。<br><br>
+
+                <h3>版本 0.2.1 - 2019.12.05</h3>
+                - 后端修复：在句子清洗时去掉了孤立省略号，这个问题会导致孤立的省略号占用两句句子的名额。<br><br>
+
+                <h3>版本 0.2.0 - 2019.12.04</h3>
+                - 修复了正文输入框，如果输入字数太多无法滚动的bug<br>
+                - 现在在计算摘要的时候，会同时考虑标题的影响了<br><br>
+                
+                <h3>版本 0.1.0 - 2019.12.03</h3>
+                - 项目初步上线<br><br>
+            </div>
+        </div>
+        <div class="contribution-container tab-container" style="display: none">
+            <div class="row">
+                <h3 align="left" style="font-family:verdana">前端：吴林莉</h3>
+            </div>
+            <div class="row">
+                <h3 align="left" style="font-family:verdana">数据库：李湘湘</h3>    
+            </div>
+            <div class="row">
+                <h3 align="left" style="font-family:verdana">算法：李岩、周易华</h3>    
+            </div>
+            <div class="row">
+                <h3 align="left" style="font-family:verdana">Leader，后端：周易华</h3>    
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+$(document).ready(function() {
+    //$(".tab-container").height(window.outerHeight-100)
+    $(".nav-tabs li").click(function() {
+        $(".nav-tabs li").removeClass("active")
+        $(this).addClass("active")
+        var href_val = $(this).find("a").attr("href").split("#")[1]
+        var container = href_val + "-container"
+        $(".tab-container").hide();
+        $("." + container).show();
+    })
+
+    $("#submitbt").click(function(){
+        var post_data = {
+            "title": $("#inputTitle").val(), 
+            "content": $("#inputContent").val()
+        }
+        $.post("/testPost", { "title": $("#inputTitle").val(), "content": $("#inputContent").val() },
+            function(data, status) {
+                if(post_data.content){
+                    var analyse_result_data = data.meta;
+                    var draw_result_data = data.result;
+
+                    $("#positive_content").html(analyse_result_data.positive.toLocaleString().replace(",","，"))
+                    $("#neutral_content").html(analyse_result_data.neutral.toLocaleString().replace(",","，"))
+                    $("#negative_content").html(analyse_result_data.negative.toLocaleString().replace(",","，"))
+                    $("#analyse-result-container").show()
+
+                    sd_1.draw("main_sd_1",draw_result_data)//绘制散点图
+                    tree.draw("main_tree",draw_result_data)//绘制树图
+                    leida.draw("main_leida",draw_result_data)//绘制雷达图
+                    sd_2.draw("main_sd_2",draw_result_data)
+
+                   
+                }
+                
+                // alert("数据：" + data + "\n状态：" + status);
+            },"json").error(function(){
+				console.error("network error")
+			});
+    });
+})
+
+</script>
+
+</html>

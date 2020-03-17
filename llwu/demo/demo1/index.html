@@ -5,153 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./static/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="./static/sd_1.js"></script>
+    <script src="./static/tree.js"></script>
+    <script src="./static/leida.js"></script>
+    <script src="./static/sd_2.js"></script>
+    
     <title>Document</title>
+    <style>
+        .positive{
+            color: chocolate;
+        }
+        .negative{
+            color: chartreuse;        
+        }
+        .neuter{
+            color: dimgrey;
+        }
+        .tree_leida_wrapper{
+            width: 1400px;
+            margin: 0px auto;
+        }
+        #main_sd_2,.sd_wrapper{
+            width: 800px;
+        }
+        .sd_wrapper{
+            margin: 0px auto;
+        }
+    </style>
 </head>
 <body>
-    <div id="main" style="width: 1800px;height:600px;">
-    
-    
+    <div  class="analyse_result">
+        <span id="positive_content" class="positive"></span><span class="positive">，</span>
+        <span id="neuter_content" class="neuter"></span><span class="neuter">，</span>
+        <span id="negative_content" class="negative"></span><span class="negative">。</span>
+
     </div>
+    <div class="main_picture_wrapper">
+        <div id="main_sd_1" style="width: 1000px;height:150px;margin-top: 30px;"></div>
+        <div class="tree_leida_wrapper" style="height: 600px;">
+            <div id="main_tree" style="width: 800px;height:600px;margin-top: 30px;float: left;"></div>
+            <div id="main_leida" style="width: 600px;height:300px;margin-top: 30px;float: left;"></div>
+        </div>
+        <div class="sd_wrapper">
+            <div id="main_sd_2" style="height:1000px;margin-top: 30px;"></div>
+        </div>
+        
+    </div>
+    
     <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-
-        var posList = [
-            'left', 'right', 'top', 'bottom',
-            'inside',
-            'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-            'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-        ];
-        var app = {}
-        app.configParameters = {
-            rotate: {
-                min: -90,
-                max: 90
-            },
-            align: {
-                options: {
-                    left: 'left',
-                    center: 'center',
-                    right: 'right'
-                }
-            },
-            verticalAlign: {
-                options: {
-                    top: 'top',
-                    middle: 'middle',
-                    bottom: 'bottom'
-                }
-            },
-            position: {
-                options: echarts.util.reduce(posList, function (map, pos) {
-                    map[pos] = pos;
-                    return map;
-                }, {})
-            },
-            distance: {
-                min: 0,
-                max: 100
-            }
-        };
-
-        app.config = {
-            rotate: 90,
-            align: 'left',
-            verticalAlign: 'middle',
-            position: 'insideBottom',
-            distance: 15,
-            onChange: function () {
-                var labelOption = {
-                    normal: {
-                        rotate: app.config.rotate,
-                        align: app.config.align,
-                        verticalAlign: app.config.verticalAlign,
-                        position: app.config.position,
-                        distance: app.config.distance
-                    }
-                };
-                myChart.setOption({
-                    series: [{
-                        label: labelOption
-                    }, {
-                        label: labelOption
-                    }, {
-                        label: labelOption
-                    }, {
-                        label: labelOption
-                    }]
-                });
-            }
-        };
-
-
-        var labelOption = {
-            show: true,
-            position: app.config.position,
-            distance: app.config.distance,
-            align: app.config.align,
-            verticalAlign: app.config.verticalAlign,
-            rotate: app.config.rotate,
-            formatter: '{c}  {name|{a}}',
-            fontSize: 16,
-            rich: {
-                name: {
-                    textBorderColor: '#fff'
-                }
-            }
-        };
-
-        var option = {
-            color: ['#003366', '#006699', '#4cabce', '#e5323e'],
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
-            legend: {
-                data: ['Forest', 'Steppe', 'Desert', 'Wetland']
-            },
+    
+       $.get("/static/data.json",{},function(data, status) {
+            var data = data.data 
+            sd_1.draw("main_sd_1",data)//绘制散点图
+            tree.draw("main_tree",data)//绘制树图
+            leida.draw("main_leida",data)//绘制雷达图
+            sd_2.draw("main_sd_2",data)
+        });
+        $.get("/static/analyse_data.json",{},function(data, status) {
+            var data = data.data 
+            $("#positive_content").html(data.positive.toLocaleString().replace(",","，"))
+            $("#neuter_content").html(data.neuter.toLocaleString().replace(",","，"))
+            $("#negative_content").html(data.negative.toLocaleString().replace(",","，"))
             
-            xAxis: [
-                {
-                    type: 'category',
-                    axisTick: {show: false},
-                    data: ['类别1','类别2', '类别3', '类别4', '类别5', '类别6','类别7', '类别8','类别9','类别10', '类别11','类别12', '类别13', '类别14', '类别15', '类别16','类别17', '类别18','类别19', '类别20']
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    name: '指标1',
-                    type: 'bar',
-                    barGap: 0,
-                    data: [320, 332, 301, 334, 390,320, 332, 301, 334, 390,320, 332, 301, 334, 390,320, 332, 301, 334, 390]
-                },
-                {
-                    name: '指标2',
-                    type: 'bar',
-                    data: [220, 182, 191, 234, 290,220, 182, 191, 234, 290,220, 182, 191, 234, 290,220, 182, 191, 234, 290]
-                },
-                {
-                    name: '指标3',
-                    type: 'bar',
-                    data: [150, 232, 201, 154, 190,150, 232, 201, 154, 190,150, 232, 201, 154, 190,150, 232, 201, 154, 190]
-                },
-                {
-                    name: '指标4',
-                    type: 'bar',
-                    data: [98, 77, 101, 99, 40, 98, 77, 101, 99, 40, 98, 77, 101, 99, 40,98, 77, 101, 99, 40, 98, 77, 101, 99, 40]
-                }
-            ]
-        };
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        });
     </script>
 </body>
 </html>
