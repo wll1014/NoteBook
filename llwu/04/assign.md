@@ -53,7 +53,7 @@ D. tanh
 
 ### Why we don't use zero initialization for all parameters ?
 
-
+如果都初始化为0，隐层计算都是一样的，那么多少个神经元都是一样的
 
 ### Can you implement the softmax function using python ?
 
