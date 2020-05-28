@@ -38,14 +38,14 @@
 
 假设一个图片的是黑白色的，其数据如下：
 
-![图片数据](.\cnn\图片数据.png)
+![图片数据](图片数据.png)
 
 
 
 
 假设卷积矩阵（filter）如下（一般选择奇数的矩阵）：
 
-![卷积层Filter](.\cnn\卷积层Filter.png)
+![卷积层Filter](卷积层Filter.png)
 
 卷积神经网络是如何通过filter卷积计算的？计算过程如下：
 
@@ -127,21 +127,21 @@ $$
 
 设原始图片如下，检测该图片是否存在中间的竖线
 
-![feature_detection_source](.\cnn\feature_detection_source.png)
+![feature_detection_source](feature_detection_source.png)
 
 卷积filter如下
 
-![feature_detection_filter](.\cnn\feature_detection_filter.png)
+![feature_detection_filter](feature_detection_filter.png)
 
 检测结果如下
 
-![feature_detection_result](.\cnn\feature_detection_result.png)
+![feature_detection_result](feature_detection_result.png)
 
 ### 卷积操作中偶尔会用到的操作
 
 ####  more about cnns padding1
 
-![padding1](.\cnn\padding1.png)
+![padding1](padding1.png)
 
 如果想卷积后尺寸和卷积前尺寸一致，那么
 $$
@@ -195,7 +195,7 @@ $$
 
 正常卷积的时候，strides是为1的；即step=1即上下左右都是1
 
-![cnn_strides3](.\cnn\cnn_strides3.png)
+![cnn_strides3](cnn_strides3.png)
 
 所以如果数据量比较大的时候，加速计算尺寸收缩，可以，设置stride
 
@@ -219,7 +219,7 @@ $$
 
 原始图片用来计算当前点的像素数目
 
-![感受野](.\cnn\感受野.png)
+![感受野](感受野.png)
 
 [感受野详细]( https://blog.csdn.net/program_developer/article/details/80958716 )
 
@@ -231,21 +231,21 @@ $$
 
 - maxpool
 
-![max_pool](.\cnn\max_pool.png)
+![max_pool](max_pool.png)
 
 - average pool
 
-![average_pool](.\cnn\average_pool.png)
+![average_pool](average_pool.png)
 
 好处： 无需参数却能够降低维度
 
 #### more about cnns feature maps
 
-![feature_map](.\cnn\feature_map.png)
+![feature_map](feature_map.png)
 
 ### 数字识别示例方法（类似letNet-5）
 
-![数字识别算法](./cnn/digit_detection.png)
+![数字识别算法](digit_detection.png)
 
 
 
@@ -257,15 +257,15 @@ $$
 
 ### AlexNet
 
-![AlexNet流程](.\cnn\AlexNet.png)
+![AlexNet流程](AlexNet.png)
 
 ### GoogleNet
 
-![GoogleNet创新](./cnn/googleNet.png)
+![GoogleNet创新](googleNet.png)
 
 ### VGG
 
-![VGG卷积神经网络](./cnn/VGG.png)
+![VGG卷积神经网络](VGG.png)
 
 ### ResNet
 
@@ -282,7 +282,7 @@ ResNet--允许跳级卷积
 
 ​		
 
-![image-20191123234915211](./cnn/RestNet.png)
+![image-20191123234915211](RestNet.png)
 
 ## TEXTCNN -NLP 应用
 
@@ -292,7 +292,7 @@ NLP一般使用一维卷积
 
 只从上到下进行卷积
 
-![image-20191123235410262](./cnn/TEXTCNN.png)
+![image-20191123235410262](TEXTCNN.png)
 
 
 
